@@ -1,9 +1,15 @@
-# Fabric Example Mod
+# Data Driven Stuff
 
-## Setup
+Allows creating some minecraft stuff with only a few config files.  
+Features:-
+ - Fuel
+ - ~~Itemgroups~~
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+## Usage
+
+Fuel:-
+ - Refer to `minecraft/config/fuels.datadrivenminecraft.json5` 
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This mod is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.

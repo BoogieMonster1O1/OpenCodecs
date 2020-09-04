@@ -1,12 +1,15 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "io.github.boogiemonster1o1.opencodecs.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "DynamicRegistryManagerMixin",
+    "ItemMixin",
+    "ItemSettingsAccess",
+    "RegistryAccess"
   ],
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

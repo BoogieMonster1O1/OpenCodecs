@@ -1,0 +1,27 @@
+{
+  "name": "foo",
+  "settings": {
+    "maxCount": 64,
+    "maxDamage": 0,
+    "recipeRemainder": "minecraft:bread",
+    "itemGroupName": "building_blocks",
+    "rarity": "EPIC",
+    "foodComponent": {
+      "hunger": 4,
+      "saturationModifier": 0.5,
+      "alwaysEdible": true,
+      "meat": true,
+      "snack": true
+    },
+    "fireproof": true
+  },
+  "enchantability": 25,
+  "tooltips": [
+    "This is an example tooltip!",
+    "This is another example tooltip!"
+  ],
+  "enchantable": true,
+  "glint": true,
+  "drinkSound": "block.anvil.fall",
+  "eatSound": "block.anvil.fall"
+}
