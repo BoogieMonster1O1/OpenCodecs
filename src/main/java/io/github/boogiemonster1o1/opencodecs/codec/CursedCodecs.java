@@ -17,6 +17,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Rarity;
@@ -83,9 +84,9 @@ public interface CursedCodecs {
             return item.isEnchantable(null);
         }), Codec.BOOL.fieldOf("glint").forGetter((item) -> {
             return item.hasGlint(null);
-        }), Codec.STRING.fieldOf("drinkSound").forGetter((item) -> {
+        }), Codec.STRING.optionalFieldOf("drinkSound", Objects.requireNonNull(Registry.SOUND_EVENT.getId(SoundEvents.ENTITY_GENERIC_DRINK)).toString()).forGetter((item) -> {
             return Objects.requireNonNull(Registry.SOUND_EVENT.getId(item.getDrinkSound())).toString();
-        }), Codec.STRING.fieldOf("eatSound").forGetter((item) -> {
+        }), Codec.STRING.optionalFieldOf("eatSound", Objects.requireNonNull(Registry.SOUND_EVENT.getId(SoundEvents.ENTITY_GENERIC_EAT)).toString()).forGetter((item) -> {
             return Objects.requireNonNull(Registry.SOUND_EVENT.getId(item.getEatSound())).toString();
         })).apply(instance, ItemBuilder::createV0);
     });
