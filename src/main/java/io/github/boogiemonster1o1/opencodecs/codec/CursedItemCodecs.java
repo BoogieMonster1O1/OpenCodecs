@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -24,8 +25,8 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 @SuppressWarnings({"Convert2MethodRef", "CodeBlock2Expr"})
-public interface CursedCodecs {
-    Codec<StatusEffectInstance> STATUS_EFFECT_ENTRY_CODEC_V0 = RecordCodecBuilder.create((instance) -> {
+public interface CursedItemCodecs {
+    Codec<StatusEffectInstance> STATUS_EFFECT_INSTANCE_CODEC_V0 = RecordCodecBuilder.create((instance) -> {
         return instance.group(Codec.STRING.fieldOf("id").forGetter((effect) -> {
             return Objects.requireNonNull(Registry.STATUS_EFFECT.getId(effect.getEffectType())).toString();
         }), Codec.INT.fieldOf("duration").forGetter((effect) -> {
@@ -33,6 +34,14 @@ public interface CursedCodecs {
         }), Codec.intRange(0, 255).fieldOf("amplifier").forGetter((effect) -> {
             return effect.getAmplifier();
         })).apply(instance, StatusEffectInstanceBuilder::createV0);
+    });
+
+    Codec<Pair<StatusEffectInstance, Float>> STATUS_EFFECT_ENTRY_CODEC_V0 = RecordCodecBuilder.create((instance) -> {
+        return instance.group(STATUS_EFFECT_INSTANCE_CODEC_V0.fieldOf("effect").forGetter((pair) -> {
+            return pair.getFirst();
+        }), Codec.FLOAT.fieldOf("chance").forGetter((pair) -> {
+            return pair.getSecond();
+        })).apply(instance, Pair::new);
     });
 
     Codec<FoodComponent> FOOD_COMPONENT_CODEC_V0 = RecordCodecBuilder.create((instance) -> {
@@ -46,6 +55,8 @@ public interface CursedCodecs {
             return food.isMeat();
         }), Codec.BOOL.fieldOf("snack").forGetter((food) -> {
             return food.isSnack();
+        }), Codec.list(STATUS_EFFECT_ENTRY_CODEC_V0).optionalFieldOf("effects", null).forGetter((food) -> {
+            return food.getStatusEffects();
         })).apply(instance, FoodComponentBuilder::createV0);
     });
 
