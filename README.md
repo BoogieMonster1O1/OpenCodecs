@@ -1,14 +1,6 @@
 # Data Driven Stuff
 
-Allows creating some minecraft stuff with only a few config files.  
-Features:-
- - Fuel
- - ~~Itemgroups~~
-
-## Usage
-
-Fuel:-
- - Refer to `minecraft/config/fuels.datadrivenminecraft.json5` 
+Don't even think about it :wink:
 
 ## License
 
